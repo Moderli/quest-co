@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question View</title>
+    <style type="text/css">
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+textarea{
+    height: 30px;
+    overflow: scroll;
+    border-radius: 10px;
+    border: none;  
+}
+
+.header {
+    background: linear-gradient(to right, orange, #6f7b96);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom-right-radius: 10px;  
+    padding: 15px;
+}
+
+.logo a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 29px;
+    font-weight: bolder;
+}
+
+.main-nav {
+    font-size: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav li {
+    margin-right: 15px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover {
+    color: #ecf0f1;
+}
+
+#logout {
+    background: linear-gradient(to right, orange, red);;
+    color: #fff;
+    padding: 12px 23px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 30px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 38px;
+    box-shadow:  0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#logout:hover {
+    background: linear-gradient(to right, red, orange);
+}
+
+
+        .question-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #q-question {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .ask_question {
+            display: none;
+            margin-top: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        button[type="submit"] {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+.viewquest{
+    background: linear-gradient(to right, skyblue, violet );;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 60px;
+}
+.viewquest h2{
+    text-align: center;
+
+    
+}
+
+    </style>
+</head>
+<body>
+	<header class="header">
+		<h1 class="logo"><a href="#">Anonymate</a></h1>
+      <ul class="main-nav">
+          <li><a href="#">Home</a></li>
+          <li><a href="http://127.0.0.1:8000/">About</a></li>
+          <li><a href="#q-question">Add a question</a></li>
+          <li><a href="#viewquest">questions</a></li>
+      </ul>
+      <button id="logout">logout</button>
+	</header> 
+    <main>
+        
+    <div class="question-container">
+        <button id = "q-question" onclick="QuestionButton()">Ask a question</button>
+	   <div class='ask_question' id="question" style="display: none;">
+		    <!-- Add Question Form -->
+        <form method="post" action="{% url 'question_view' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Ask Question</button>
+
+        </form>
+	   </div></div>
+	<div class="quest" id="quest">
+    <h1>Feed</h1>
+    <div>
+        
+    </div>
+    </div>
+    {% for question in questions %}
+        <div class="viewquest" id="viewquest">
+            <div class="user-profile">
+            {% if question.is_anonymous %}
+                <p>Asked by: Anonymous</p>
+                <h2>Question : </h2><h2>{{ question.question_text }}</h2>
+            </div>
+            {% else %}
+                <p>Asked by: {{ question.user.username }}</p>
+            {% endif %}
+            <p>Description: {{ question.question_description }}</p>
+
+            <form method="post" action="{% url 'add_comment' question.id %}">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type="submit">Add Comment</button>
+            </form>
+
+            <!-- Comments -->
+            <ul>
+                {% for comment in question.comments.all %}
+                    <li>{{ comment.text }} - {{ comment.user.username }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Add Answer Form -->
+            <form method="post" action="{% url 'add_answer' question.id %}">
+                {% csrf_token %}
+                {{ answer_form.as_p }}
+                <button type="submit">Add Answer</button>
+            </form>
+
+            <!-- Answers -->
+            <ul>
+                {% for answer in question.answers.all %}
+                    <li>{{ answer.answer_text }} - {{ answer.user.username }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // AJAX for Like and Dislike buttons
+        // Add Comment button click event
+        $('.add-comment-btn').click(function () {
+            var questionId = $(this).data('question-id');
+            var commentText = prompt('Enter your comment:');
+            if (commentText !== null) {
+                // Send AJAX request to add comment
+                $.post('{% url 'add_comment' 0 %}'.replace('0', questionId), { text: commentText }, function (data) {
+                    // Update the comments section on the page
+                    $(`.comments-container[data-question-id=${questionId}]`).html(data);
+                });
+            }
+        });
+
+        // Add Answer button click event
+        $('.add-answer-btn').click(function () {
+            var questionId = $(this).data('question-id');
+            var answerText = prompt('Enter your answer:');
+
+            if (answerText !== null) {
+                // Send AJAX request to add answer
+                $.post('{% url 'add_answer' 0 %}'.replace('0', questionId), { answer_text: answerText }, function (data) {
+                    // Update the answers section on the page
+                    $(`.answers-container[data-question-id=${questionId}]`).html(data);
+                });
+            }
+        });
+</script>
+        <script>
+            function QuestionButton() {
+                var settingsDiv = document.getElementById("question");
+                if (settingsDiv.style.display == "none"){
+                    settingsDiv.style.display = "block";
+                } else {
+                    settingsDiv.style.display = "none";
+                }
+            }
+        </script>
+        <script>
+    document.getElementById('logout').addEventListener('click', function() {
+        // Redirect to the logout view
+        window.location.href = '/logout/';
+    });
+</script>
+
+</body>
+</html>
+
+</body>
+</html>

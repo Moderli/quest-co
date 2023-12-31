@@ -1,0 +1,117 @@
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        {% block styles %}
+        
+        
+
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("https://s.abcnews.com/images/US/Gty_Hacker_Group_Anonymous_er_160318_16x9_992.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden; /* Ensure the blur doesn't extend beyond the body */
+            position: relative; /* Required for stacking elements */
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: inherit; /* Inherit the background image from body */
+            filter: blur(10px); /* Adjust the blur amount as needed */
+        }
+
+        .container {
+            padding: 40px;
+            background: linear-gradient(to right, violet, #6f7b96);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1; /* Ensure the container is above the blurred background */
+        }
+    form {
+        font-weight: 500;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 12px;
+        margin-bottom: 20px; /* Adjust the alpha channel for transparency */
+        border-radius: 10px;
+    }
+
+    input {
+        padding-right: 88px;
+        padding-top: 14px;
+        border-radius: 8px;
+        border: 1px solid #ffac93;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus {
+        border-color: #ff7e5f;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    input[type="submit"] {
+        margin-top: 10px;
+        background-color: #ff7e5f;
+        color: #fff;
+        border: none;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #ff6b4e;
+    }
+        
+    
+        {% endblock %}
+    </style>
+    <title>sign up page</title>
+</head>
+
+<body>
+    <div class="container">
+        <form method="post" class="form">
+            <h2>Sign up</h2><br>
+            {% csrf_token %}<br>
+            {% for field in form %}
+            <div class="inputBox">
+                {{ field.label_tag }}<br>
+                {{ field }}<br>
+            </div>
+            {% if field.help_text %}<br>
+            <small style="display: none">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+            <div class="inputBox">
+                <input type="submit" value="Sign up">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock %}

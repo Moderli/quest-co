@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+            background: linear-gradient(to right, violet, #6f7b96);
+        }
+
+        div {
+            width: 80%;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            margin-top: 50px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            transition: box-shadow 0.3s;
+        }
+
+        div:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2, h3 {
+            color: #3498db;
+        }
+
+        button {
+            background: linear-gradient(to right, violet, #6f7b96);
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #settings {
+            display: none;
+            margin-top: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-image: url("https://s.abcnews.com/images/US/Gty_Hacker_Group_Anonymous_er_160318_16x9_992.jpg");
+            border: 2px solid #3498db;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile img:hover {
+            transform: scale(1.1);
+        }
+
+        .profile div {
+            flex-grow: 1;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #2980b9;
+        }
+
+        .posted-questions {
+            background: linear-gradient(to right, #909293, #6f7b96);
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 15px;
+            background-color: #ecf0f1;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .posted-questions ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .posted-questions ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center>{{ form.instance.user.profile_pic.url }}</center>
+
+    <div>
+        <h2>User Profile</h2>
+
+        <button onclick="showSettings()">Settings</button>
+
+        <div id="settings" style="display: none;">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="profile">
+                    <div>
+                        <img src="https://marketplace.canva.com/EAFWqgieqss/1/0/1600w/canva-blue-and-peach-gradient-facebook-profile-picture-oBy0jAd4JFY.jpg" alt="Profile Picture">
+                        <p><strong>Name:</strong> {{ form.instance.user.username }}</p>
+                        <p><strong>Description:</strong> {{ form.instance.description }}</p>
+                    </div>
+                </div>
+
+                {{ form.profile_pic }}
+                {{ form.username }}
+                {{ form.description }}
+                <button type="submit">Save</button>
+            </form>
+        </div>
+
+        {% if form.errors %}
+            <p class="error-message">There was an error in the form submission.</p>
+        {% endif %}
+        <pre>{{ form.instance }}</pre>
+        <h3>Profile Information</h3>
+        <div class="profile">
+            <div>
+                <img src="https://marketplace.canva.com/EAFWqgieqss/1/0/1600w/canva-blue-and-peach-gradient-facebook-profile-picture-oBy0jAd4JFY.jpg" alt="Profile Picture">
+                <p><strong>Name:</strong> {{ form.instance.user.username }}</p>
+                <p><strong>Description:</strong> {{ form.instance.description }}</p>
+            </div>
+        </div>
+
+
+        <h3>Posted Questions</h3>
+        <div class="posted-questions">
+            <ul>
+                {% for question in user_questions %}
+                    <h4>{{ question.question_text }}</h4><br>
+                    <p>{{ question.question_description }}</p><hr>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="social-icons">
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        function showSettings() {
+            var settingsDiv = document.getElementById("settings");
+            settingsDiv.style.display = "block";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Anonymate</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            min-height: 100vh;
+            padding-top: 56px; /* Add padding-top to accommodate the fixed navbar */
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        h2,
+        h3,
+        a {
+            color: #34495e;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .logo {
+            margin: 0;
+            font-size: 1.45em;
+        }
+
+        .main-nav {
+            margin-top: 5px;
+        }
+
+        .logo a,
+        .main-nav a {
+            padding: 10px 15px;
+            text-transform: uppercase;
+            text-align: center;
+            display: block;
+        }
+
+        .main-nav a {
+            color: #34495e;
+            font-size: .99em;
+        }
+
+        .main-nav a:hover {
+            color: #718daa;
+        }
+
+        .header {
+            padding-top: .5em;
+            padding-bottom: .5em;
+            border: 1px solid #a2a2a2;
+            background-color: #f4f4f4;
+            -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .container {
+            margin-top: 20px;
+            background: linear-gradient(to right, orange, red);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            min-height: auto;
+            border-radius: 10px;
+            box-shadow: 20%;
+            width: auto;
+            color: white;
+        }
+
+        .container p {
+            margin: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="#">Anonymate</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="questions/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/accounts/login">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <div class="sub-container">
+            <h1>Anonymate</h1><br>
+            <p>"Welcome to Anonymate, the groundbreaking app designed to revolutionize communication by providing a secure and judgment-free space for users to engage in anonymous dialogue. Anonymate allows individuals to pose questions without the burden of revealing their identity, promoting open and honest expression. Our platform encourages a diverse exchange of perspectives, fostering a community where users can freely share experiences and opinions. With customizable filters, users can tailor their interactions, ensuring a personalized and enriching experience. Join Anonymate and be part of a supportive community where questions lead to meaningful conversations, and anonymity becomes a powerful tool for authentic connection."</p>
+        </div>
+    </main>
+    <main class="container">
+        <h1>About the web app</h1>
+        <p>At the heart of Anonymate is the concept of posing questions without the burden of revealing one's identity. This unique approach encourages users to share their thoughts, questions, and experiences authentically, fostering a space where genuine expression is valued. By removing the fear of judgment associated with sharing personal perspectives, Anonymate empowers individuals to engage in open and honest communication.</p>
+
+        <p>Our platform is dedicated to promoting a diverse exchange of perspectives. Anonymate believes in the power of varied experiences and opinions, recognizing that true understanding and connection can only appear through the exploration of different points of view. In this community, users are encouraged to share their unique perspectives, creating a rich tapestry of conversations that goes beyond the surface.</p>
+
+        <p>Anonymate provides users with customizable filters, putting them in control of their interactions. This feature allows individuals to tailor their experience, ensuring that they engage with content that aligns with their preferences. This personalization fosters a more enriching and meaningful experience within the app, empowering users to curate the type of conversations they want to be a part of.</p>
+
+        <p>Join Anonymate and become a part of a supportive community where questions serve as catalysts for meaningful conversations. Here, anonymity is not just a feature; it is a powerful tool for authentic connection. Embrace the freedom to express yourself without reservation, share your experiences, and contribute to a community that values the richness of diverse perspectives. Anonymate is more than just an app; it is a space where anonymity fosters genuine connections and where individuals can engage in open dialogue without the fear of judgment.</p>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
