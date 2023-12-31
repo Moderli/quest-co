@@ -19,8 +19,6 @@
       "dest": "pluto/$1"
     }
   ]
-}
-{
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]
