@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-iu5l=q3()--xswo4qhgk4dl0utu(o87=b8u_6$ektu&83&9you
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','cowency.online','www.cowency.online']
+ALLOWED_HOSTS = ['127.0.0.1','cowency.online','www.cowency.online','.vercel.app']
 
 
 # Application definition
