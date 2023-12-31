@@ -1,25 +1,22 @@
 {
-
-    "builds": [{
-
-        "src": "pluto/wsgi.py",
-
-        "use": "@vercel/python",
-
-        "config": { "maxLambdaSize": "65mb", "runtime": "python3.9" }
-
-    }],
-
-    "routes": [
-
-        {
-
-            "src": "/(.*)",
-
-            "dest": "pluto/wsgi.py"
-
-        }
-
-    ]
-
+  "builds": [
+    {
+      "src": "pluto/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "65mb",
+        "runtime": "python3.9"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "pluto/wsgi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "pluto/$1"
+    }
+  ]
 }
