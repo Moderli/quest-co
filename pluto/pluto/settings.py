@@ -75,8 +75,8 @@ SESSION_COOKIE_AGE = 604800
 
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_HOST_USER = 'hiphopmusicradio25@gmail.com'  
-EMAIL_HOST_PASSWORD = 'ltbh koxt tjlc svod'  
+EMAIL_HOST_USER = 'YOUR_Gmail'  
+EMAIL_HOST_PASSWORD = 'EMAIL_password'  
 EMAIL_PORT = 587
 
 # Database
