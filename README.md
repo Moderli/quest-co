@@ -92,6 +92,3 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
-
-https://prod.liveshare.vsengsaas.visualstudio.com/join?3D05131DFA3F8EEB9E58723B09F9E9B94B9E
-
